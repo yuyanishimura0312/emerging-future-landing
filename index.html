@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emerging Future - NPO法人ミラツク</title>
+    <title>未来庵 Miraian - NPO法人ミラツク</title>
     <meta name="description" content="NPO法人ミラツク - 未来についての対話と実践を通じて、次の社会をつくる。">
     <link rel="icon" href="./favicon.ico">
     <style>
@@ -247,19 +247,201 @@
             color: var(--color-text-sub);
         }
 
-        .miraian-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            margin-top: 12px;
-            font-size: 13px;
-            color: var(--color-accent);
-            text-decoration: none;
-            font-weight: 500;
+        /* Photo gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            display: block;
             transition: opacity 0.2s;
         }
 
-        .miraian-link:hover { opacity: 0.7; }
+        .gallery-grid img:hover { opacity: 0.9; }
+
+        .gallery-grid img:first-child {
+            grid-column: 1 / -1;
+            height: 220px;
+        }
+
+        /* Map */
+        .map-wrap {
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+        }
+
+        .map-wrap iframe {
+            display: block;
+            width: 100%;
+            height: 260px;
+            border: none;
+        }
+
+        .map-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--color-text-sub);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .map-link:hover { color: var(--color-text); }
+        .map-link svg { opacity: 0.4; }
+
+        /* Station badge */
+        .station-badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            padding: 14px 18px;
+        }
+
+        .station-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--color-accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #FFFFFF;
+        }
+
+        .station-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text);
+            line-height: 1.4;
+        }
+
+        .station-note {
+            font-size: 12px;
+            color: var(--color-text-sub);
+        }
+
+        /* Steps */
+        .steps {
+            list-style: none;
+            counter-reset: step;
+            margin-top: 16px;
+            position: relative;
+        }
+
+        .steps::before {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 24px;
+            bottom: 14px;
+            width: 1px;
+            background: var(--color-border);
+        }
+
+        .steps li {
+            position: relative;
+            padding: 6px 0 6px 40px;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .steps li::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 2px;
+            top: 8px;
+            width: 20px;
+            height: 20px;
+            background: var(--color-bg);
+            color: var(--color-text-sub);
+            border: 1.5px solid var(--color-border);
+            border-radius: 50%;
+            font-size: 10px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .steps li:last-child::before {
+            background: var(--color-accent);
+            color: #FFFFFF;
+            border-color: var(--color-accent);
+        }
+
+        /* Alt grid */
+        .alt-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .alt-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            padding: 16px 18px;
+        }
+
+        .alt-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--color-text-sub);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 4px;
+        }
+
+        .alt-value {
+            font-size: 13px;
+            line-height: 1.7;
+            color: var(--color-text);
+        }
+
+        /* Note */
+        .note {
+            background: var(--color-surface);
+            border-radius: 10px;
+            padding: 18px 22px;
+            font-size: 13px;
+            color: var(--color-text-sub);
+            line-height: 1.9;
+            border: 1px solid var(--color-border);
+        }
+
+        .note-item {
+            display: flex;
+            gap: 8px;
+            align-items: baseline;
+        }
+
+        .note-item + .note-item { margin-top: 4px; }
+
+        .note-item::before {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: var(--color-border);
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 9px;
+        }
 
         /* Organization */
         .org-grid {
@@ -352,6 +534,9 @@
             .activity-grid { grid-template-columns: 1fr; }
             .org-grid { grid-template-columns: 1fr; }
             .miraian-banner { height: 200px; }
+            .gallery-grid img { height: 120px; }
+            .gallery-grid img:first-child { height: 180px; }
+            .alt-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -420,10 +605,92 @@
             <div class="miraian-info">
                 <p>京都大学のほど近く、吉田の静かな住宅地に佇む「未来庵」。対話と探究のための拠点として、ワークショップ、研修、合宿などにご利用いただけます。</p>
                 <div class="address">〒606-8317 京都府京都市左京区吉田本町13</div>
-                <a href="https://miraian.emerging-future.org" class="miraian-link">
-                    アクセスガイドを見る
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
-                </a>
+            </div>
+        </div>
+
+        <!-- Gallery -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-title">Gallery</span>
+            </div>
+            <div class="gallery-grid">
+                <img src="https://cdnspacemarket.com/uploads/attachments/1105567/image.jpg?width=800&height=400&fit=crop&quality=80&format=jpg"
+                     alt="庭園の小径" loading="lazy">
+                <img src="https://cdnspacemarket.com/uploads/attachments/1105568/image.jpg?width=500&height=320&fit=crop&quality=80&format=jpg"
+                     alt="室内" loading="lazy">
+                <img src="https://cdnspacemarket.com/uploads/attachments/1105569/image.jpg?width=500&height=320&fit=crop&quality=80&format=jpg"
+                     alt="庭の眺め" loading="lazy">
+            </div>
+        </div>
+
+        <!-- Map -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-title">Map</span>
+            </div>
+            <div class="map-wrap">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1634.0!2d135.7846307!3d35.0263201!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x600109001af17809%3A0x60dbdabd021454e3!2z44Of44Op44OE44Kv5pyq5p2l5bq1IC1NSVJBSS1BTi0!5e0!3m2!1sja!2sjp!4v1"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            <a href="https://www.google.com/maps/place/%E3%83%9F%E3%83%A9%E3%83%84%E3%82%AF%E6%9C%AA%E6%9D%A5%E5%BA%B5+-MIRAI-AN-/@35.0263201,135.7846307,17z" target="_blank" class="map-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Google Maps で開く
+            </a>
+        </div>
+
+        <!-- Access -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-title">Access</span>
+            </div>
+
+            <div class="station-badge">
+                <div class="station-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><path d="M8 19l-2 3"/><path d="M16 19l2 3"/><path d="M9 15h0"/><path d="M15 15h0"/></svg>
+                </div>
+                <div>
+                    <div class="station-name">京阪「出町柳」駅 徒歩約10分</div>
+                    <div class="station-note">京都大学から徒歩2分</div>
+                </div>
+            </div>
+
+            <ol class="steps">
+                <li>京阪「出町柳」駅の出口3を出て、今出川通を東へ進みます</li>
+                <li>百万遍交差点を右折し、東大路通を南へ</li>
+                <li>京都大学正門を過ぎ、吉田本町エリアへ</li>
+                <li>吉田本町13が<strong>未来庵</strong>です</li>
+            </ol>
+        </div>
+
+        <!-- Alternative -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-title">Alternative</span>
+            </div>
+            <div class="alt-grid">
+                <div class="alt-card">
+                    <div class="alt-label">京都駅から</div>
+                    <div class="alt-value">市バスで約30分<br>（206系統など）</div>
+                </div>
+                <div class="alt-card">
+                    <div class="alt-label">バス</div>
+                    <div class="alt-value">206・201・31号系統<br>「京大正門前」下車 徒歩2分</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notes -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-title">Notes</span>
+            </div>
+            <div class="note">
+                <div class="note-item">駐車場・駐輪場はありません。公共交通機関をご利用ください。</div>
+                <div class="note-item">到着されましたらお気軽にお声がけください。</div>
             </div>
         </div>
 
