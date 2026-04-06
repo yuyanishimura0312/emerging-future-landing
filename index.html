@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emerging Future - NPO法人ミラツク</title>
+    <meta name="description" content="NPO法人ミラツク - 未来についての対話と実践を通じて、次の社会をつくる。">
+    <link rel="icon" href="./favicon.ico">
+    <style>
+        :root {
+            --color-bg:       #FFFFFF;
+            --color-surface:  #FAF6F0;
+            --color-text:     #2C1F14;
+            --color-text-sub: #7A5840;
+            --color-accent:   #783C28;
+            --color-accent-light: #D08060;
+            --color-border:   #E8D8C8;
+            --color-border-light: #F5EDE0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans",
+                         "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            height: 480px;
+            overflow: hidden;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(26, 26, 26, 0.15) 0%,
+                rgba(26, 26, 26, 0.55) 100%
+            );
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0 24px;
+            text-align: center;
+        }
+
+        .hero-logo {
+            height: 22px;
+            opacity: 0.8;
+            margin-bottom: 24px;
+            filter: brightness(10);
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: #FFFFFF;
+            margin-bottom: 12px;
+            text-shadow: 0 1px 8px rgba(0,0,0,0.15);
+        }
+
+        .hero .tagline {
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 0.06em;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+            max-width: 480px;
+        }
+
+        /* Content */
+        .content {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+
+        /* Intro card */
+        .intro-card {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            padding: 32px 36px;
+            margin-top: -48px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .intro-card p {
+            font-size: 15px;
+            line-height: 2;
+            color: var(--color-text);
+        }
+
+        .intro-card p + p {
+            margin-top: 16px;
+        }
+
+        /* Section */
+        .section {
+            margin-top: 48px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .section-header::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--color-border);
+        }
+
+        .section-title {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--color-text-sub);
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            white-space: nowrap;
+        }
+
+        /* Activity cards */
+        .activity-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .activity-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            padding: 24px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s ease-out;
+        }
+
+        .activity-card:hover {
+            border-color: var(--color-accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(120, 60, 40, 0.08);
+        }
+
+        .activity-card .card-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--color-text-sub);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 8px;
+        }
+
+        .activity-card .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text);
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .activity-card .card-desc {
+            font-size: 13px;
+            color: var(--color-text-sub);
+            line-height: 1.7;
+        }
+
+        .activity-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* Miraian section */
+        .miraian-banner {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 240px;
+        }
+
+        .miraian-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .miraian-banner .banner-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(26, 26, 26, 0.6) 0%, transparent 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 24px;
+        }
+
+        .miraian-banner .banner-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #FFFFFF;
+            letter-spacing: 0.1em;
+            margin-bottom: 4px;
+        }
+
+        .miraian-banner .banner-sub {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .miraian-info {
+            margin-top: 16px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            padding: 24px 28px;
+        }
+
+        .miraian-info p {
+            font-size: 14px;
+            line-height: 1.9;
+            color: var(--color-text);
+        }
+
+        .miraian-info .address {
+            margin-top: 12px;
+            font-size: 13px;
+            color: var(--color-text-sub);
+        }
+
+        .miraian-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 12px;
+            font-size: 13px;
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+
+        .miraian-link:hover { opacity: 0.7; }
+
+        /* Organization */
+        .org-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .org-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            padding: 20px 24px;
+        }
+
+        .org-card .org-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 6px;
+        }
+
+        .org-card .org-desc {
+            font-size: 12px;
+            color: var(--color-text-sub);
+            line-height: 1.7;
+        }
+
+        /* Contact */
+        .contact-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            padding: 28px 32px;
+            text-align: center;
+        }
+
+        .contact-card p {
+            font-size: 14px;
+            color: var(--color-text-sub);
+            margin-bottom: 16px;
+            line-height: 1.8;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 32px;
+            background: var(--color-accent);
+            color: #FFFFFF;
+            border: none;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            text-decoration: none;
+            letter-spacing: 0.02em;
+            transition: all 0.2s ease-out;
+        }
+
+        .contact-btn:hover {
+            opacity: 0.85;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .footer-org {
+            font-size: 11px;
+            color: var(--color-text-sub);
+            letter-spacing: 0.04em;
+            opacity: 0.5;
+            line-height: 1.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .hero { height: 380px; }
+            .hero h1 { font-size: 28px; }
+            .hero .tagline { font-size: 13px; }
+            .content { padding: 0 16px 60px; }
+            .intro-card { padding: 24px; margin-top: -36px; }
+            .activity-grid { grid-template-columns: 1fr; }
+            .org-grid { grid-template-columns: 1fr; }
+            .miraian-banner { height: 200px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <header class="hero">
+        <img src="https://cdnspacemarket.com/uploads/attachments/1105566/image.jpg?width=1200&height=600&fit=crop&quality=85&format=jpg"
+             alt="未来庵の庭園" class="hero-img" loading="eager">
+        <div class="hero-overlay">
+            <img src="https://emerging-future.org/wp-content/themes/miratuku/img/common/header-logo.png"
+                 alt="miratuku" class="hero-logo">
+            <h1>Emerging Future</h1>
+            <div class="tagline">未来についての対話と実践を通じて、次の社会をつくる</div>
+        </div>
+    </header>
+
+    <div class="content">
+        <!-- Intro -->
+        <div class="intro-card">
+            <p>ミラツクは、社会課題の解決と新しい価値の創造に取り組む人々が集い、対話を通じて未来のビジョンを描き、実践へとつなげるプラットフォームです。</p>
+            <p>企業、行政、NPO、研究者、そして市民。セクターを超えた多様なステークホルダーとともに、これからの社会の姿を探究しています。</p>
+        </div>
+
+        <!-- Activities -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-title">Activities</span>
+            </div>
+            <div class="activity-grid">
+                <div class="activity-card">
+                    <div class="card-label">Consulting</div>
+                    <div class="card-title">未来洞察<br>コンサルティング</div>
+                    <div class="card-desc">企業・組織の長期戦略策定を、フューチャーデザインとステークホルダーダイアログで支援</div>
+                </div>
+                <div class="activity-card">
+                    <div class="card-label">Community</div>
+                    <div class="card-title">対話と<br>コミュニティ</div>
+                    <div class="card-desc">セクターを超えた対話の場づくりと、共創コミュニティの運営</div>
+                </div>
+                <div class="activity-card">
+                    <div class="card-label">Research</div>
+                    <div class="card-title">リサーチ &<br>ナレッジ</div>
+                    <div class="card-desc">社会課題・未来トレンドに関する調査研究と知見の共有</div>
+                </div>
+                <div class="activity-card">
+                    <div class="card-label">Media</div>
+                    <div class="card-title">esse-sense</div>
+                    <div class="card-desc">本質を探り、次の時代を見据えたインタビューメディア</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Miraian -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-title">Miraian</span>
+            </div>
+            <div class="miraian-banner">
+                <img src="https://cdnspacemarket.com/uploads/attachments/1105567/image.jpg?width=800&height=400&fit=crop&quality=80&format=jpg"
+                     alt="未来庵" loading="lazy">
+                <div class="banner-overlay">
+                    <div class="banner-title">未来庵</div>
+                    <div class="banner-sub">京都・吉田 / Kyoto, Yoshida</div>
+                </div>
+            </div>
+            <div class="miraian-info">
+                <p>京都大学のほど近く、吉田の静かな住宅地に佇む「未来庵」。対話と探究のための拠点として、ワークショップ、研修、合宿などにご利用いただけます。</p>
+                <div class="address">〒606-8317 京都府京都市左京区吉田本町13</div>
+                <a href="https://miraian.emerging-future.org" class="miraian-link">
+                    アクセスガイドを見る
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Organization -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-title">Organization</span>
+            </div>
+            <div class="org-grid">
+                <div class="org-card">
+                    <div class="org-name">NPO法人ミラツク</div>
+                    <div class="org-desc">未来についての対話と実践を推進する非営利組織。セクター横断の共創プロジェクトを展開。</div>
+                </div>
+                <div class="org-card">
+                    <div class="org-name">株式会社エッセンス</div>
+                    <div class="org-desc">ミラツクの事業部門。コンサルティング、リサーチ、メディア運営を担う。</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-title">Contact</span>
+            </div>
+            <div class="contact-card">
+                <p>お問い合わせ・ご相談はこちらから</p>
+                <a href="mailto:info@emerging-future.org" class="contact-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg>
+                    info@emerging-future.org
+                </a>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-org">NPO法人ミラツク / 株式会社エッセンス<br>&copy; Emerging Future. All rights reserved.</div>
+        </footer>
+    </div>
+</body>
+</html>
